@@ -41,6 +41,17 @@
                 <input type="number" name="Miles" class="form-control" placeholder="Enter Miles/Kilometers">
             </div>
             <div class="form-group mb-2">
+                <label for="" class="label-control col-md-12 mb-2">Is Available?</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="IsAvailable" id="inlineRadio1" value="Yes">
+                    <label class="form-check-label" for="inlineRadio1">Yes, is available</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="IsAvailable" id="inlineRadio2" value="No">
+                    <label class="form-check-label" for="inlineRadio2">No, is not available</label>
+                </div>
+            </div>
+            <div class="form-group mb-2">
                 <label for="" class="label-control">Image</label>
                 <input type="file" id="image" name="Car_Image" class="form-control">
             </div>

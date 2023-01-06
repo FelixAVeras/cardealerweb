@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('Year');
             $table->string('Miles')->nullable();
             $table->string('Car_Image')->nullable();
+            $table->string('IsAvailable');
             $table->timestamps();
         });
     }

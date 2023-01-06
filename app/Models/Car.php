@@ -14,6 +14,7 @@ class Car extends Model
         'Model',
         'Year',
         'Miles',
-        'Car_Image'
+        'Car_Image',
+        'IsAvailable'
     ];
 }
