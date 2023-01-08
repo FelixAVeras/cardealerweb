@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Dealer - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <style>
@@ -21,14 +22,20 @@
             <h2 class="text-center display-4">Car Dealer</h2>
             <h3 class="text-center text-muted">Login</h3>
 
-            <form method="post" action="auth/login" class="login-form mt-5 offset-md-3 w-50">
+            @if($message = Session::get('success'))
+                <div class="alert alert-danger">{{ $message }}</div>
+            @endif
+
+            <form method="post" action="{{ route('auth.validate_login') }}" class="login-form mt-5 offset-md-3 w-50">
+                @csrf
+                
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Email Address</label>
-                    <input type="text" name="email" class="form-control" placeholder="Enter email address" value="{{ old('email') }}">
+                    <input type="text" name="email" class="form-control" placeholder="Enter email address">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter password" value="{{ old('password') }}">
+                    <input type="password" name="password" class="form-control" placeholder="Enter password">
                 </div>
 
                 <div class="d-grid gap-2 w-50 offset-md-3">
@@ -43,7 +50,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-12 col-md-12 d-grid gap-2 offset-md-4" style="width: 34%;">
-                    <a href="#" class="text-center btn btn-secondary">Register User</a>
+                    <a href="{{ url('register') }}" class="text-center btn btn-secondary">Register User</a>
                 </div>
             </div>
         </div>

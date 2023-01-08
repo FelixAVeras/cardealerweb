@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Dealer - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <style>
@@ -21,14 +22,11 @@
             <h2 class="text-center display-4">Car Dealer</h2>
             <h3 class="text-center text-muted">Register User</h3>
 
-            <form action="" class="login-form mt-5 offset-md-3 w-50" method="post">
+            <form action="{{ route('auth.validate_registration') }}" class="login-form mt-5 offset-md-3 w-50" method="post">
+                @csrf    
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter email address">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="" class="control-label">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Enter email address">
+                    <input type="text" class="form-control" name="name" placeholder="Enter Name">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Email Address</label>
@@ -45,7 +43,7 @@
             </form>
             <div class="row mt-4 mb-3">
                 <div class="col-12 col-md-12 d-grid gap-2 offset-md-4" style="width: 34%;">
-                    <a href="#" class="text-center btn btn-secondary">Back to Login</a>
+                    <a href="{{ url('login') }}" class="text-center btn btn-secondary">Back to Login</a>
                 </div>
             </div>
         </div>

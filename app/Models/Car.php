@@ -14,6 +14,7 @@ class Car extends Model
         'Model',
         'Year',
         'Miles',
+        'Plate',
         'Car_Image',
         'Price',
         'IsAvailable'

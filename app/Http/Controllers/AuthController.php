@@ -2,57 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+
 class AuthController extends Controller
 {
-    public function login()
-    {
+    public function login() {
         return view('auth.login');
     }
-    
-    public function postLogin(LoginRequest $request)
-    {
-        $credentials = $request->getCredentials();
 
-        if (!Auth::validate($credentials)) { 
-            return redirect()->to('login')->withErrors('danger', "Account failling registered.");
+    function validate_login(Request $request) {
+        $this->validate($request, [
+            'email' => 'required', 
+            'password' => 'required'
+        ]);
+
+        if(!Auth::attempt($request->only(['email', 'password']))) {
+            return redirect('login')->with('danger', 'Credentials are not valid');
         }
 
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        return redirect()->route('home')->with('success', 'welcome again');
 
-        Auth::login($user);
+        // $request->validate(['email' =>  'required', 'password'  =>  'required']);
 
-        return $this->authenticated($request, $user);
+        // $credentials = $request->only('email', 'password');
+
+        // if(!Auth::attempt($credentials)) {
+        //     return redirect('login')->with('success', 'Credentials are not valid');
+        // }
+
+        // $credentials = $request->only('email', 'password');
+
+        // if (Auth::attempt($credentials)) {
+        //     return redirect()->intended('home')->withSuccess('Signed in');
+        // }
+
+        // return redirect('home');
     }
 
-    protected function authenticated(Request $request, $user) 
-    {
-        return redirect()->intended();
-    }
-
-    public function register()
-    {
+    // Register User
+    public function register() {
         return view('auth.register');
     }
 
-    public function postRegister(RegisterRequest $request) 
-    {
-        $user = User::create($request->validated());
+    function validate_registration(Request $request) {
+        $request->validate([
+            'name'         =>   'required',
+            'email'        =>   'required|email|unique:users',
+            'password'     =>   'required|min:6'
+        ]);
 
-        auth()->login($user);
+        $data = $request->all();
 
-        return redirect('/')->with('success', "Account successfully registered.");
+        User::create([
+            'name'  =>  $data['name'],
+            'email' =>  $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
+
+        return redirect('home')->with('success', 'Registration Completed, now you can login');
     }
 
-    public function logout() {
+    // Home
+    // function home() {
+    //     if(Auth::check()) {
+    //         return view('home.index');
+    //     }
+
+    //     return redirect('login')->with('success', 'you are not allowed to access');
+    // }
+
+    // Logout
+    function logout() {
         Session::flush();
-        
+
         Auth::logout();
 
-        return redirect('login');
+        return Redirect('login');
     }
 }

@@ -31,7 +31,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-      @auth
+      <!-- @auth
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-fill"></i> {{auth()->user()->name}}
@@ -43,7 +43,20 @@
             <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Logout</a></li>
           </ul>
         </li>
-      @endauth
+      @endauth -->
+      @if(Auth::check())
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-fill"></i> {{ Auth::user()->getName() }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-start">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Logout</a></li>
+          </ul>
+        </li>
+      @endif
       </ul>
     </div>
   </div>
