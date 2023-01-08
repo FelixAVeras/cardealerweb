@@ -21,6 +21,7 @@
                     <th>End Date</th>
                     <th>Fee</th>
                     <th>Remaining Amount</th>
+                    <th>Days Left</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                     <td>25-Jan-2023</td>
                     <td>$20.00</td>
                     <td>$369.25</td>
+                    <td>15</td>
                     <td>
                         <button class="btn btn-primary"><i class="bi bi-eye"></i> Details</button>
                     </td>

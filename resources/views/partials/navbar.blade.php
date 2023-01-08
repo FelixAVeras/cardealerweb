@@ -31,20 +31,19 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-        <!-- <li class="nav-item dropdown">
+      @auth
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-fill"></i> Felix Carvajal
+            <i class="bi bi-person-fill"></i> {{auth()->user()->name}}
           </a>
           <ul class="dropdown-menu dropdown-menu-start">
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Logout</a></li>
           </ul>
-        </li> -->
-        <li class="nav-item">
-          <a href="" class="nav-link btn btn-secondary">Login</a>
         </li>
-        <li class="nav-item">
-          <a href="" class="nav-link">Register</a>
-        </li>
+      @endauth
       </ul>
     </div>
   </div>

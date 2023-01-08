@@ -19,31 +19,33 @@
     <div class="container mt-3">
         <div class="mt-5">
             <h2 class="text-center display-4">Car Dealer</h2>
-            <h3 class="text-center text-muted">Login</h3>
+            <h3 class="text-center text-muted">Register User</h3>
 
-            <form method="post" action="auth/login" class="login-form mt-5 offset-md-3 w-50">
+            <form action="" class="login-form mt-5 offset-md-3 w-50" method="post">
+                <div class="form-group mb-3">
+                    <label for="" class="control-label">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter email address">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="" class="control-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter email address">
+                </div>
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Email Address</label>
-                    <input type="text" name="email" class="form-control" placeholder="Enter email address" value="{{ old('email') }}">
+                    <input type="text" class="form-control" name="email" placeholder="Enter email address">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="control-label">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter password" value="{{ old('password') }}">
+                    <input type="password" class="form-control" name="password" placeholder="Enter password">
                 </div>
 
                 <div class="d-grid gap-2 w-50 offset-md-3">
-                    <button type="submit" class="btn btn-primary">Enter</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </div>
             </form>
-
-            <div class="row mb-3">
-                <div class="col-12 col-md-12">
-                    <a href="#" class="d-block mb-4 mt-2 text-center">Forgot Password?</a>
-                </div>
-            </div>
-            <div class="row mb-3">
+            <div class="row mt-4 mb-3">
                 <div class="col-12 col-md-12 d-grid gap-2 offset-md-4" style="width: 34%;">
-                    <a href="#" class="text-center btn btn-secondary">Register User</a>
+                    <a href="#" class="text-center btn btn-secondary">Back to Login</a>
                 </div>
             </div>
         </div>
