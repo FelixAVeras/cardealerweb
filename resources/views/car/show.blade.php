@@ -19,24 +19,22 @@
             <dd>{{ $car->Model }}</dd>
             <dt>Year</dt>
             <dd>{{ $car->Year }}</dd>
+            <dt>Plate</dt>
+            <dd>{{ $car->Plate }}</dd>
             <dt>Miles</dt>
             <dd>{{ $car->Miles }}</dd>
+            <dt>Price per Day</dt>
+            <dd>${{ $car->Price }}</dd>
             <dt>Is Avalaible</dt>
             <dd>{{ $car->IsAvailable }}</dd>
         </dl>
-
+        
+        <a href="" class="btn btn-success">Rent this car</a>
         <a href="" class="btn btn-warning">Edit</a>
         <a href="" class="btn btn-danger">Delete</a>
-        <button class="btn btn-secondary" data-bs-toggle="collapse" 
-            data-bs-target="#collapseExample">Comment <i class="bi bi-chevron-down"></i></button>
-        
-        <div class="collapse mt-3" id="collapseExample">
-            <div class="card card-body">
-                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </div>
-        </div>
     </div>
 </div>
 
+<hr>
 <!-- Used by customer list -->
 @endsection

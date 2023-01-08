@@ -15,33 +15,36 @@
         <li class="nav-item">
           <a class="nav-link" href="/customers">Customers</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Rent a Car</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Services
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Sell Car</a></li>
             <li><a class="dropdown-item" href="#">Rent Car</a></li>
-            <!-- <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-fill"></i> Felix Carvajal
           </a>
           <ul class="dropdown-menu dropdown-menu-start">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
-        </li>
-        <!-- <li class="nav-item">
-          <a href="" class="nav-link">Customers</a>
         </li> -->
+        <li class="nav-item">
+          <a href="" class="nav-link btn btn-secondary">Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link">Register</a>
+        </li>
       </ul>
     </div>
   </div>

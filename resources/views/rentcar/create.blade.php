@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@section('title', 'New Car')
+@section('title', 'Rent a Car')
 
 @section('content')
 <a href="{{ route('cars.index') }}" class="btn btn-light mb-3"><i class="bi bi-chevron-left"></i> Go Back</a>
@@ -72,20 +72,22 @@
         </form>
     </div>
     <div class="col-12 col-md-8">
-        <p class="text-center">Image Preview</p>
-        <img src="" alt="" class="img-fluid rounded" id="image_preview" style="width: 600px; height: auto;">
+        <h4 class="text-center mb-3">Results</h4>
+        <div class="table-responsive">
+            <table class="table-hover table-borderless">
+                <thead class="table-light">
+                    <tr>
+                        <th>Element 1</th>
+                        <th>Element 2</th>
+                        <th>Element 3</th>
+                        <th>Element 4</th>
+                        <th>Element 5</th>
+                        <th>Element 6</th>
+                        <th>Element 7</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
-
-<script>
-    document.getElementById('image').addEventListener('change', function() {
-        let reader = new FileReader();
-
-        reader.onload = (e) => {
-            document.getElementById('image_preview').setAttribute('src', e.target.result);
-        }
-
-        reader.readAsDataURL(this.files[0]);
-    });
-</script>
 @endsection

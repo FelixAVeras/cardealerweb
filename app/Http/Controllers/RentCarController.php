@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Car;
+use App\Models\RentCar;
 
-class CarController extends Controller
+class RentCarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::latest()->paginate(10);
+        $rentCars = RentCar::latest()->paginate(10);
 
-        return view('car.index', compact('cars'))
+        return view('rentcar.index', compact('rentCars'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -28,7 +28,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('car.create');
+        return view('rentcar.create');
     }
 
     /**
@@ -39,30 +39,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'Brand' => 'required',
-            'Model' => 'required',
-            'Year' => 'required',
-            'Price' => 'required',
-            'Miles' => 'required',
-            'Plate' => 'required',
-            'IsAvailable' => 'required',
-            'Car_Image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-
-        $input = $request->all();
-
-        if ($image = $request->file('Car_Image')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['Car_Image'] = "$profileImage";
-        }
-
-        Car::create($input);
-     
-        return redirect()->route('cars.index')
-                        ->with('success','Car created successfully.');
+        //
     }
 
     /**
@@ -71,11 +48,9 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function show($id)
     {
-        //$car = Car::where('cars.id', '=', $id);
-
-        return view('car.show',compact('car'));
+        //
     }
 
     /**

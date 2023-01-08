@@ -1,19 +1,19 @@
 @extends('welcome')
 
-@section('title', 'Cars')
+@section('title', 'Rent a Car')
 
 @section('content')
-    <h2 class="text-left mb-3">Cars</h2>
+    <h2 class="text-left mb-3">Rent a Car</h2>
 
     <div class="row mb-3">
         <div class="col-12 col-md-4">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search car...">
+                <input type="text" class="form-control" placeholder="Search...">
                 <button type="button" class="btn btn-secondary"><i class="bi bi-search"></i></button>
             </div>
         </div>
         <div class="col-12 col-md-8">
-            <a href="cars/create" class="btn btn-primary float-end">Create New Car</a>
+            <a href="rentcars/create" class="btn btn-primary float-end">Rent car</a>
         </div>
     </div>
 
@@ -21,25 +21,18 @@
         <table class="table table-hover table-borderless">
             <thead class="table-light">
                 <tr>
-                    <th>Photo</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Miles</th>
-                    <th>Price per Day</th>
-                    <th>Is Avalaible?</th>
+                    <th>Vehicle</th>
+                    <th>Customer</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Initial Payment</th>
+                    <th>Total Price</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($cars as $car)
+                <!-- @foreach($cars as $car)
                 <tr>
-                    <td>
-                        <img src="/images/{{ $car->Car_Image }}" 
-                             class="rounded carimage" 
-                             style="width:200px;"
-                             alt="">
-                    </td>
                     <td>{{ $car->Brand }}</td>
                     <td>{{ $car->Model }}</td>
                     <td>{{ $car->Year }}</td>
@@ -60,13 +53,8 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @endforeach -->
             </tbody>
         </table>
     </div>
-
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
 @endsection
