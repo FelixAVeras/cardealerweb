@@ -22,11 +22,17 @@
             <h2 class="text-center display-4">Car Dealer</h2>
             <h3 class="text-center text-muted">Login</h3>
 
-            @if($message = Session::get('success'))
-                <div class="alert alert-danger">{{ $message }}</div>
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>    
+                </div>
             @endif
 
-            <form method="post" action="{{ route('auth.validate_login') }}" class="login-form mt-5 offset-md-3 w-50">
+            <form action="{{ route('auth.validate_authenticate') }}" method="POST" class="login-form mt-5 offset-md-3 w-50">
                 @csrf
                 
                 <div class="form-group mb-3">

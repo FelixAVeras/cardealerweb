@@ -8,7 +8,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <!-- <h2 class="display-4 text-left mb-2">Hello</h2> -->
+    <h2 class="display-4 text-left mb-2">Hello</h2>
     <h3 class="text-left mb-3">Dashboard</h3>
 
     <a href="cars" class="btn btn-primary">Go to Cars</a>
