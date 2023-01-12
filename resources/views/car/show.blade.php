@@ -30,6 +30,7 @@
         </dl>
         
         <a href="" class="btn btn-success">Rent this car</a>
+        <a href="" class="btn btn-secondary">Book this car</a>
         <a href="" class="btn btn-warning">Edit</a>
         <a href="" class="btn btn-danger">Delete</a>
     </div>

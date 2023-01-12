@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RentCarController;
 
 //Authentication
 // Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -21,3 +22,7 @@ Route::resource('cars', CarController::class); //->middleware('auth');
 
 //Customers
 Route::resource('customers', CustomerController::class); //->middleware('auth');
+
+//Rent Car
+Route::get('rent_a_car', [RentCarController::class, 'index'])->name('rent_a_car'); //->middleware('auth');
+Route::get('rent', [RentCarController::class, 'create'])->name('rent'); //->middleware('auth');

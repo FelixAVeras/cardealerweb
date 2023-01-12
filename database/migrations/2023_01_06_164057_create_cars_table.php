@@ -21,8 +21,10 @@ return new class extends Migration
             $table->decimal('Price', 8, 2);
             $table->string('Miles')->nullable();
             $table->string('Plate');
+            $table->string('City_Location');
             $table->string('Car_Image')->nullable();
-            $table->string('IsAvailable');
+            $table->boolean('IsAvailable')->default(false);
+            //$table->boolean('IsReserved')->default(false);
             $table->timestamps();
         });
     }

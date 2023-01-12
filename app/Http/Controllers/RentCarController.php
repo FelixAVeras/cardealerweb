@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\RentCar;
+use App\Models\Car;
+use App\Models\Customer;
 
 class RentCarController extends Controller
 {
@@ -15,6 +17,11 @@ class RentCarController extends Controller
      */
     public function index()
     {
+        $cars = Car::pluck('Brand', 'id')->toArray();
+        $customers = Customer::all();
+
+        //$suppliers = Supplier::pluck('name', 'id')->toArray();
+
         $rentCars = RentCar::latest()->paginate(10);
 
         return view('rentcar.index', compact('rentCars'))

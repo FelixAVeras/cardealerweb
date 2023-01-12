@@ -18,5 +18,6 @@ class Car extends Model
         'Car_Image',
         'Price',
         'IsAvailable'
+        //'IsReserved'
     ];
 }

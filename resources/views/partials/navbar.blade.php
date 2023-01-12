@@ -16,7 +16,7 @@
           <a class="nav-link" href="/customers">Customers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Rent a Car</a>
+          <a class="nav-link" href="/rent_a_car">Rent a Car</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
