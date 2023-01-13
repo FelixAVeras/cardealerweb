@@ -12,6 +12,12 @@ class HomeController extends Controller
         //     'user' => auth()->user()
         // ]);
 
-        return view('home.index');
+        // return view('home.index');
+
+        if(Auth::check()) {
+            return view('home');
+        }
+
+        return redirect()->route('login')->with('success', 'you are not allowed to access');
     }
 }

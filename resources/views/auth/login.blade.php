@@ -1,68 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Dealer - Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-</head>
-<style>
-    @media screen and (max-width: 768px) {
-        form.login-form {
-            width: 100%;
-        }
-    }
-</style>
-<body>
-    <div class="container mt-3">
-        <div class="mt-5">
-            <h2 class="text-center display-4">Car Dealer</h2>
-            <h3 class="text-center text-muted">Login</h3>
+<x-guest-layout>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>    
-                </div>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
+
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+
+        <!-- Remember Me -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
             @endif
 
-            <form action="{{ route('auth.validate_authenticate') }}" method="POST" class="login-form mt-5 offset-md-3 w-50">
-                @csrf
-                
-                <div class="form-group mb-3">
-                    <label for="" class="control-label">Email Address</label>
-                    <input type="text" name="email" class="form-control" placeholder="Enter email address">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="" class="control-label">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter password">
-                </div>
-
-                <div class="d-grid gap-2 w-50 offset-md-3">
-                    <button type="submit" class="btn btn-primary">Enter</button>
-                </div>
-            </form>
-
-            <div class="row mb-3">
-                <div class="col-12 col-md-12">
-                    <a href="#" class="d-block mb-4 mt-2 text-center">Forgot Password?</a>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-12 col-md-12 d-grid gap-2 offset-md-4" style="width: 34%;">
-                    <a href="{{ url('register') }}" class="text-center btn btn-secondary">Register User</a>
-                </div>
-            </div>
+            <x-primary-button class="ml-3">
+                {{ __('Log in') }}
+            </x-primary-button>
         </div>
-        
-    </div>
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    </form>
+</x-guest-layout>

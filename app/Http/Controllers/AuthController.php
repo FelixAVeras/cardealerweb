@@ -4,79 +4,76 @@ namespace App\Http\Controllers;
 
 use Hash;
 use Session;
-use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login() {
+    public function showLogin() {
         return view('auth.login');
     }
 
-    function authenticate(Request $request) {
-        validator(request()->all(), [
+    public function authenticate(Request $request) {
+        $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required']
-        ])->validate();
+            'password' => 'required'
+        ]);
 
-        if (auth()->attempt(request()->only(['email', 'password']))) {
-            request()->session()->regenerate();
+        $user = User::where('email', $request->email)->first();
 
-            return redirect('/home');
+        if ($user != null && Hash::check($request->password, $user->password)) {
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+    
+                return redirect()->intended('home');
+            }
         }
 
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors([
+            'email' => 'Invalid credentials'
+        ])->onlyInput('email');
     }
 
     // Register User
-    public function register() {
+    public function showRegister() {
         return view('auth.register');
     }
 
-    function validate_registration(Request $request) {
-        // $request->validate([
-        //     'name'         =>   'required',
-        //     'email'        =>   'required|email|unique:users',
-        //     'password'     =>   'required|min:6'
-        // ]);
-
-        // $data = $request->all();
-
-        // User::create([
-        //     'name'  =>  $data['name'],
-        //     'email' =>  $data['email'],
-        //     'password' => Hash::make($data['password'])
-        // ]);
-
-        // return redirect('home')->with('success', 'Registration Completed, now you can login');
-
-        $this->validator($request->all())->validate();
+    public function register(Request $request) {
+        $request->validate([
+            'name'         =>   'required',
+            'email'        =>   'required|email|unique:users',
+            'password'     =>   'required|min:6'
+        ]);
         
-        event(new Registered($user = $this->create($request->all())));
-        
-        $this->guard()->login($user);
+        $user = User::create([
+            'name'  =>  $data['name'],
+            'email' =>  $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        session()->flash('message', 'Registration Completed');
+
+        return redirect()->route('home');
+    }
+
+    // Home
+    public function home() {
+        if(!Auth::check()) {
+            return redirect()->route('login');
+        }
+        
+        return view('home');
     }
 
     // Logout
-    function logout() {
-        auth()->logout();
+    public function logout() {
+        Auth::logout();
 
-        return Redirect('login');
-    }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    // Register validator
-    protected function validator(array $data) {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return redirect()->route('login');
     }
 }

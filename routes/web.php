@@ -1,28 +1,31 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CarController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\RentCarController;
 
-//Authentication
-// Route::get('login', [AuthController::class, 'login'])->name('login');
-// Route::get('register', [AuthController::class, 'register'])->name('register');
-// Route::post('validate_authenticate', [AuthController::class, 'authenticate'])->name('auth.validate_authenticate');
-// Route::post('validate_registration', [AuthController::class, 'validate_registration'])->name('auth.validate_registration');
-// Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-//Home
-Route::get('home', [HomeController::class, 'index'])->name('home'); //->middleware('auth');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//Cars
-Route::resource('cars', CarController::class); //->middleware('auth');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-//Customers
-Route::resource('customers', CustomerController::class); //->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-//Rent Car
-Route::get('rent_a_car', [RentCarController::class, 'index'])->name('rent_a_car'); //->middleware('auth');
-Route::get('rent', [RentCarController::class, 'create'])->name('rent'); //->middleware('auth');
+require __DIR__.'/auth.php';
